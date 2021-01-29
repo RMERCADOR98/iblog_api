@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/main.js"
+    "dev": "nodemon src/main.js",
+    "start": "sucrase-node src/main.js"
   },
   "keywords": [],
   "author": "",
