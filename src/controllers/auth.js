@@ -11,12 +11,12 @@ const SignUp = async (req, res) => {
   //fetch ao backend para verificar se o user já existe
   const userExists = await Users.findOne({
     where: {
-      email: email,
+      email,
     },
   });
-  console.log(userExists);
+
   if (userExists) {
-    return res.json({
+    return res.status(500).json({
       status: 500,
     });
   }
@@ -26,10 +26,11 @@ const SignUp = async (req, res) => {
 
   //criar o utilizador
   const create = await Users.create({
-    email: email,
+    email,
     password: hashed,
-    username: username,
+    username,
   });
+
   return res.json(create);
 };
 
@@ -39,21 +40,21 @@ const SignIn = async (req, res) => {
   //verificar se o user já existe
   const userExists = await Users.findOne({
     where: {
-      email: email,
+      email,
     },
   });
+
   if (!userExists) {
-    return res.json({
+    return res.status(500).json({
       status: 500,
     });
   }
 
   //verificar se a password que foi iserida coincide com a que foi guardada na base de dados
-
   const validate = bcrypt.compareSync(password, userExists.password);
 
   if (!validate) {
-    return res.json({
+    return res.status(500).json({
       status: 500,
     });
   }
@@ -64,6 +65,7 @@ const SignIn = async (req, res) => {
     },
     process.env.JWT_KEY
   );
+
   return res.json({
     token: token,
     username: userExists.username,

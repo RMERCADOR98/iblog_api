@@ -11,7 +11,7 @@ Users.hasMany(Posts, {
 });
 
 Posts.belongsTo(Users, {
-  onDelete: "CASCADE",
+  onDelete: "CASCADE", //AO FAZER DELETE DO USER, APAGA TODOS OS POSTS
   foreignKey: {
     name: "userId",
     allowNull: false,
