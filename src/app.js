@@ -10,7 +10,7 @@ import likesRouter from "./router/likes";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(helmet());
 app.use(morgan("dev"));
 app.use("/api/v1/auth", authRouter);
